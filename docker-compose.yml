@@ -1,0 +1,8 @@
+version: '3.5'
+services:
+  app:
+    build:
+      context: .
+    env_file: .env
+    ports:
+      - "${NEXTJS_BIND_PORT}:${NEXTJS_BIND_PORT}"
