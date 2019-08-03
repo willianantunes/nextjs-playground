@@ -11,7 +11,7 @@ function getPosts() {
 
 const PostLink = ({ post }) => (
   <li>
-    <Link href='/p/[id]' as={`/p/${post.id}`}>
+    <Link href='/css/[id]' as={`/css/${post.id}`}>
       <a>{post.title}</a>
     </Link>
     <style jsx>{`
