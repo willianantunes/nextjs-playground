@@ -1,5 +1,5 @@
 import Layout from '../../components/MyLayout';
-import fetch from 'isomorphic-unfetch';
+import * as tvmazeService from '../../services/TVMazeService';
 
 const Post = props => (
     <Layout>
@@ -9,13 +9,9 @@ const Post = props => (
     </Layout>
 );
 
-Post.getInitialProps = async function(context) {
+Post.getInitialProps = async context => {
     const { id } = context.query;
-    const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
-    const show = await res.json();
-
-    console.log(`Fetched show: ${show.name}`);
-
+    const show = await tvmazeService.showMainInformation(id);
     return { show };
 };
 

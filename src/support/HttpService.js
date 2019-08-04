@@ -1,11 +1,10 @@
-const { URL, URLSearchParams } = require('url');
-
+import 'url-polyfill/url-polyfill.min';
 import fetch from 'isomorphic-unfetch';
 
 export async function get(url, params = {}) {
   url = new URL(url);
   if (params) {
-    url.search = new URLSearchParams(params);
+    Object.entries(params).forEach(([key, value]) => url.searchParams.append(key, value));
   }
   return fetch(url.href).then(r => r.json());
 }

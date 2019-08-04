@@ -11,3 +11,12 @@ export async function showSearch(name) {
 
   return httpService.get(showSearchEndpoint, params);
 }
+
+/**
+ * https://www.tvmaze.com/api#show-main-information
+ */
+export async function showMainInformation(id) {
+  let showMainInformationEndpoint = `${endpoint}/shows/${id}`;
+
+  return httpService.get(showMainInformationEndpoint);
+}
