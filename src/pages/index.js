@@ -1,6 +1,6 @@
 import Layout from '../components/MyLayout';
 import Link from 'next/link';
-import fetch from 'isomorphic-unfetch';
+import * as tvmazeService from '../services/TVMazeService';
 
 const Index = props => (
   <Layout>
@@ -17,11 +17,8 @@ const Index = props => (
   </Layout>
 );
 
-Index.getInitialProps = async function() {
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-  const data = await res.json();
-
-  console.log(`Show data fetched. Count: ${data.length}`);
+Index.getInitialProps = async () => {
+  const data = await tvmazeService.showSearch('batman');
 
   return {
     shows: data.map(entry => entry.show),
