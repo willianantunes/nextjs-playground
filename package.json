@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
     "dev": "next",
     "build": "next build",
     "start": "next start -p $NEXTJS_BIND_PORT"
@@ -27,6 +28,12 @@
     "react-markdown": "^4.1.0"
   },
   "devDependencies": {
-    "prettier": "^1.18.2"
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.8.0",
+    "enzyme": "^3.10.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2",
+    "react-test-renderer": "^16.8.6"
   }
 }
