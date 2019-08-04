@@ -1,8 +1,27 @@
+require('dotenv').config();
+
+const path = require('path');
+const Dotenv = require('dotenv-webpack');
+
 // https://nextjs.org/docs#custom-configuration
 module.exports = {
   // https://nextjs.org/docs#setting-a-custom-build-directory
   distDir: '../dist',
-  webpack: function(cfg) {
+  webpack: (cfg, { isServer }) => {
+    // Fixes npm packages that depend on `fs` module
+    if (!isServer) {
+      cfg.node = {
+        fs: 'empty',
+      };
+    }
+    cfg.plugins = cfg.plugins || [];
+    cfg.plugins = [
+      ...cfg.plugins,
+      new Dotenv({
+        path: path.join(path.dirname(__dirname), '.env'),
+        systemvars: true,
+      }),
+    ];
     const originalEntry = cfg.entry;
     cfg.entry = async () => {
       const entries = await originalEntry();

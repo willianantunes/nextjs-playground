@@ -12,6 +12,10 @@ Useful links:
 - https://nextjs.org/docs#production-deployment
 - https://spectrum.chat/next-js/general/why-using-isomorphic-unfetch-rather-than-other-library~743d842d-f429-42d1-8184-570985456dec
 - https://stackoverflow.com/questions/35038857/setting-query-string-using-fetch-get-request
+- https://jaketrent.com/post/environment-variables-in-nextjs/
+- https://zeit.co/blog/next5-1#environment-configuration
+- https://stackoverflow.com/a/53272504/3899136
+- https://github.com/zeit/next.js/issues/7755
 
 About testing:
 

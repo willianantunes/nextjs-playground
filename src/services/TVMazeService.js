@@ -1,6 +1,7 @@
+require('dotenv').config();
 import * as httpService from '../support/HttpService';
 
-const endpoint = 'https://api.tvmaze.com';
+const endpoint = process.env.API_TVMAZE_ENDPOINT;
 
 /**
  * https://www.tvmaze.com/api#show-search
