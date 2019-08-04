@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "next",
-    "build": "next build",
-    "start": "next start -p $NEXTJS_BIND_PORT"
+    "dev": "next ./src",
+    "build": "next build ./src",
+    "start": "next start ./src -p $NEXTJS_BIND_PORT"
   },
   "repository": {
     "type": "git",
