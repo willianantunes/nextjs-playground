@@ -58,7 +58,7 @@ describe('Integrations tests for Http infrastructure code', () => {
     });
   });
 
-  test('Should use verb POST without body and query string', async () => {
+  test('Should use verb POST', async () => {
     const result = await myCustomHttp.post(`http://localhost:${port}/http`);
     const jsonResult = await result.json();
 

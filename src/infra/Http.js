@@ -13,12 +13,12 @@ export async function get(url, params = {}, headers = {}) {
   });
 }
 
-export async function post(url, data) {
+export async function post(url, body) {
   return fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(body),
   });
 }
