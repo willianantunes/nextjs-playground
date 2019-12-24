@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import Header from '../../src/components/Header';
+import Header from '../../../src/components/Header';
 
 test('Should properly render Header component', () => {
   const component = renderer.create(<Header />);

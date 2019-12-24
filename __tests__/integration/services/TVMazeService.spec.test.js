@@ -1,4 +1,4 @@
-import * as tvmazeService from '../../src/services/TVMazeService';
+import * as tvmazeService from '../../../src/services/TVMazeService';
 
 test('Should search for show given the provided name and return a fixed list of 10 items', async () => {
   let result = await tvmazeService.showSearch('batman');
