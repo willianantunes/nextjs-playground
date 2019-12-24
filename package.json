@@ -7,7 +7,8 @@
     "test": "jest",
     "dev": "next ./src",
     "build": "next build ./src",
-    "start": "next start ./src -p $NEXTJS_BIND_PORT"
+    "start": "next start ./src -p $NEXTJS_BIND_PORT",
+    "mockserver": "MOCK_HEADERS=Authorization mockserver -p 9000 -m '__tests__/support/mocks'"
   },
   "repository": {
     "type": "git",
