@@ -1,8 +1,79 @@
 # Next.JS Playground
 
-With laze at my side right now, I can't properly write this file 😩
+First I use it to test Next.JS and its various features. I had a big headache to configure Jest with it in order to work properly but now everything seems OK. 
 
-Useful links:
+Well here you'll see my solution for a **code-challenge** which I believe is not used anymore as it is old, maybe if you search for it you may find it somewhere in GitHub.
+
+As always I'm following [Yoda's philosophy](https://github.com/be-dev-yes/yoda), that's why this project exists.
+
+## Challenge details
+
+1. **@mentions**: A way to mention a user. Always starts with an '@' and ends when hitting a non-word.
+2. **Emoticons**: For this exercise, you only need to consider 'custom' emoticons which are ASCII strings, no longer than 15 characters, contained in parenthesis. You can assume that anything matching this format is an emoticon.
+3. **Links**: Any URLs contained in the message, along with the page's title.
+
+For example, calling your function with the following inputs should result in the corresponding return values.
+
+**Input:** "@chris you around?"
+
+**Return (string):**
+
+    {
+      "mentions": [
+        "chris"
+      ]
+    }
+
+
+**Input:** "Good morning! (megusta) (coffee)"
+
+**Return (string):**
+
+    {
+      "emoticons": [
+        "megusta",
+        "coffee"
+      ]
+    }
+
+
+**Input:** "Olympics are starting soon; http://www.nbcolympics.com"
+
+**Return (string):**
+
+    {
+      "links": [
+        {
+          "url": "http://www.nbcolympics.com",
+          "title": "NBC Olympics | Home of the 2016 Olympic Games in Rio"
+        }
+      ]
+    }
+
+
+**Input:** "@bob @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016"
+
+**Return (string):**
+
+    {
+      "mentions": [
+        "bob",
+        "john"
+      ],
+      "emoticons": [
+        "success"
+      ],
+      "links": [
+        {
+          "url": "https://twitter.com/jdorfman/status/430511497475670016",
+          "title": "Justin Dorfman on Twitter: \"nice @littlebigdetail from ..."
+        }
+      ]
+    }
+
+## Useful links
+
+About Next.JS and so on:
 
 - https://nextjs.org/learn/basics/getting-started
 - https://github.com/zeit/next.js/issues/4789
