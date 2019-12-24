@@ -6,7 +6,7 @@ export async function get(url, params = {}) {
   if (params) {
     Object.entries(params).forEach(([key, value]) => url.searchParams.append(key, value));
   }
-  return fetch(url.href).then(r => r.json());
+  return fetch(url.href);
 }
 
 export async function post(url, data) {
@@ -16,5 +16,5 @@ export async function post(url, data) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
-  }).then(r => r.json());
+  });
 }
