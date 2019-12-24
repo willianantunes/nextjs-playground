@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{
+    "count": 1,
+    "next": "http://localhost:9002/http",
+    "previous": null,
+    "results": [
+        {
+            "id": "jafar",
+            "key": "genie",
+            "another-key": "abu"
+        }
+    ]
+}

@@ -37,6 +37,27 @@ describe('Integrations tests for Http infrastructure code', () => {
     });
   });
 
+  test('Should use verb GET with query string and custom header', async () => {
+    const params = { 'qs-1': 'value', 'qs-2': 'another-value' };
+    const headers = { Authorization: 'Bearer Jafar' };
+    const result = await myCustomHttp.get(`http://localhost:${port}/http`, params, headers);
+    const jsonResult = await result.json();
+
+    expect(result.status).toBe(200);
+    expect(jsonResult).toMatchObject({
+      count: 1,
+      next: 'http://localhost:9002/http',
+      previous: null,
+      results: [
+        {
+          id: 'jafar',
+          key: 'genie',
+          'another-key': 'abu',
+        },
+      ],
+    });
+  });
+
   test('Should use verb POST without body and query string', async () => {
     const result = await myCustomHttp.post(`http://localhost:${port}/http`);
     const jsonResult = await result.json();
