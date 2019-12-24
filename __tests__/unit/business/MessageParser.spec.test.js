@@ -19,28 +19,37 @@ test('Should show 1 mention until username hits non-word character', () => {
 });
 
 test('Should show 1 emoticon given some was pointed out', () => {
-  const result = undefined;
+  const { emoticons } = messageParser.evaluate(
+    "Then I look down, and I realize there's a phone... there (grinning-face)",
+  );
 
-  expect(result).toEqual(expect.arrayContaining(['grinning-face']));
+  expect(emoticons).toEqual(expect.arrayContaining(['grinning-face']));
 });
 
 test('Should show 2 emoticons given 2 were pointed out including only one with 15 characters limit', () => {
-  const result = undefined;
+  const { emoticons } = messageParser.evaluate(
+    'Let me get you some coffee (kissing-face)(hugging-face)(something-abcde)',
+  );
 
-  expect(result).toEqual(expect.arrayContaining(['kissing-face', 'hugging-face']));
+  expect(emoticons).toEqual(expect.arrayContaining(['kissing-face', 'hugging-face', 'something-abcde']));
 });
 
 test('Should return nothing as emoticon reference has more than 15 characters', () => {
-  const result = undefined;
+  const { emoticons } = messageParser.evaluate(
+    "No, no don't! Stop cleansing my aura! No, just leave my aura alone, okay? (something-with-abcdef)",
+  );
 
-  expect(result).toHaveLength(0);
+  expect(emoticons).toHaveLength(0);
 });
 
 test('Should return nothing as emoticon reference is using brackets instead of parentheses', () => {
-  const result = undefined;
+  const { emoticons } = messageParser.evaluate(
+    'Let me get you some coffee [kissing-face][hugging-face][something-abcde]',
+  );
 
-  expect(result).toHaveLength(0);
+  expect(emoticons).toHaveLength(0);
 });
+
 test('Should show 1 link given some was mentioned', () => {
   const result = undefined;
 
