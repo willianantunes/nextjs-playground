@@ -33,7 +33,7 @@ test('Should get details from the show given its ID', async () => {
     rating: {
       average: 8.5,
     },
-    weight: 39,
+    weight: expect.any(Number),
     network: {
       id: 5,
       name: 'The CW',
@@ -54,7 +54,7 @@ test('Should get details from the show given its ID', async () => {
       original: 'http://static.tvmaze.com/uploads/images/original_untouched/3/9370.jpg',
     },
     summary: expect.stringMatching(/Hidden/),
-    updated: 1563712987,
+    updated: expect.any(Number),
     _links: {
       self: {
         href: 'http://api.tvmaze.com/shows/481',

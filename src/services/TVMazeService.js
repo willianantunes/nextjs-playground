@@ -1,5 +1,5 @@
 require('dotenv').config();
-import * as httpService from '../support/HttpService';
+import * as httpService from '../infra/Http';
 
 const endpoint = process.env.API_TVMAZE_ENDPOINT;
 
@@ -10,7 +10,7 @@ export async function showSearch(name) {
   let showSearchEndpoint = `${endpoint}/search/shows`;
   let params = { q: name };
 
-  return httpService.get(showSearchEndpoint, params);
+  return httpService.get(showSearchEndpoint, params).then(res => res.json());
 }
 
 /**
@@ -19,5 +19,5 @@ export async function showSearch(name) {
 export async function showMainInformation(id) {
   let showMainInformationEndpoint = `${endpoint}/shows/${id}`;
 
-  return httpService.get(showMainInformationEndpoint);
+  return httpService.get(showMainInformationEndpoint).then(res => res.json());
 }

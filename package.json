@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test-unit": "jest ./__tests__/unit",
+    "test-int": "jest ./__tests__/integration",
     "dev": "next ./src",
     "build": "next build ./src",
     "start": "next start ./src -p $NEXTJS_BIND_PORT",
