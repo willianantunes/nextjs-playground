@@ -1,19 +1,21 @@
-test('Should show 1 mention given someone was mentioned', () => {
-  const result = undefined;
+import * as messageParser from '../../../src/business/MessageParser';
 
-  expect(result).toEqual(expect.arrayContaining(['Jafar']));
+test('Should show 1 mention given someone was mentioned', () => {
+  const { mentions } = messageParser.evaluate("There's nothing to tell! @Jafar is just some guy I work with!");
+
+  expect(mentions).toEqual(expect.arrayContaining(['Jafar']));
 });
 
 test('Should show 2 mentions given 2 users were mentioned', () => {
-  const result = undefined;
+  const { mentions } = messageParser.evaluate('@Jafar and @Iago say hello, I wanna kill myself');
 
-  expect(result).toEqual(expect.arrayContaining(['Jafar', 'Iago']));
+  expect(mentions).toEqual(expect.arrayContaining(['Jafar', 'Iago']));
 });
 
 test('Should show 1 mention until username hits non-word character', () => {
-  const result = undefined;
+  const { mentions } = messageParser.evaluate('@Aladdin!# is honest!');
 
-  expect(result).toEqual(expect.arrayContaining(['Aladdin']));
+  expect(mentions).toEqual(expect.arrayContaining(['Aladdin']));
 });
 
 test('Should show 1 emoticon given some was pointed out', () => {
