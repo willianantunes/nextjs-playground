@@ -69,4 +69,22 @@ describe('Integrations tests for Http infrastructure code', () => {
       enemy: 'aladdin',
     });
   });
+
+  test('Should use verb POST with custom header', async () => {
+    const headers = { Authorization: 'Bearer Jafar' };
+    const result = await myCustomHttp.post(`http://localhost:${port}/http`, { headers });
+    const jsonResult = await result.json();
+
+    expect(result.status).toBe(201);
+    expect(jsonResult).toMatchObject({
+      count: 10,
+      next: 'http://localhost:9002/http',
+      previous: null,
+      results: [
+        {
+          id: 'jasmine',
+        },
+      ],
+    });
+  });
 });
