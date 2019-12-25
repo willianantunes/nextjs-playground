@@ -25,7 +25,7 @@ module.exports = {
     const originalEntry = cfg.entry;
     cfg.entry = async () => {
       const entries = await originalEntry();
-      const urlPolyfill = './support/Polyfill.js';
+      const urlPolyfill = './infra/Polyfill.js';
       if (entries['main.js'] && !entries['main.js'].includes(urlPolyfill)) {
         // https://github.com/zeit/next.js/blob/6ddb5ee3416ae027c8ecc82ab581ef7ae952ca77/examples/with-polyfills/next.config.js#L11
         entries['main.js'].unshift(urlPolyfill);
