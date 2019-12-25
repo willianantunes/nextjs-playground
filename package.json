@@ -26,6 +26,7 @@
     "dotenv": "^8.0.0",
     "dotenv-webpack": "^1.7.0",
     "isomorphic-unfetch": "^3.0.0",
+    "jsdom": "^15.2.1",
     "next": "^9.0.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -40,6 +41,7 @@
     "jest": "^24.9.0",
     "mockserver": "^3.1.1",
     "prettier": "^1.18.2",
-    "react-test-renderer": "^16.8.6"
+    "react-test-renderer": "^16.8.6",
+    "test-listen": "^1.1.0"
   }
 }
