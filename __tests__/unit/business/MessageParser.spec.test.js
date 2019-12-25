@@ -1,4 +1,10 @@
+jest.mock('../../../src/services/PageDetailsService');
+import { getDetails } from '../../../src/services/PageDetailsService';
 import * as messageParser from '../../../src/business/MessageParser';
+
+beforeEach(() => {
+  getDetails.mockClear();
+});
 
 test('Should show 1 mention given someone was mentioned', () => {
   const { mentions } = messageParser.evaluate("There's nothing to tell! @Jafar is just some guy I work with!");
@@ -51,25 +57,35 @@ test('Should return nothing as emoticon reference is using brackets instead of p
 });
 
 test('Should show 1 link given some was mentioned', () => {
-  const result = undefined;
+  const fakeTitle = { title: 'fake-title' };
+  getDetails.mockReturnValue({ title: 'fake-title' });
+  const address = 'https://github.com/willianantunes';
+  const { links } = messageParser.evaluate(`And I just want a million dollars! ${address}`);
 
-  expect(result).toHaveLength(1);
-  expect(result[0]).toMatchObject({
+  expect(getDetails).toHaveBeenCalledWith(address);
+  expect(links).toHaveLength(1);
+  expect(links[0]).toMatchObject({
     url: 'https://github.com/willianantunes',
-    title: expect.any(String),
+    title: fakeTitle.title,
   });
 });
 
 test('Should show 2 links given 2 were mentioned', () => {
-  const result = undefined;
+  const fakeTitle = { title: 'fake-title' };
+  getDetails.mockReturnValue({ title: 'fake-title' });
+  const firstAddress = 'https://github.com/be-dev-yes/yoda';
+  const secondAddress = 'https://github.com/sapegin/jest-cheat-sheet';
+  const { links } = messageParser.evaluate(`${firstAddress} Can I get you some coffee?! ${secondAddress}`);
 
-  expect(result).toHaveLength(2);
-  expect(result[0]).toMatchObject({
+  expect(getDetails).toHaveBeenNthCalledWith(1, firstAddress);
+  expect(getDetails).toHaveBeenNthCalledWith(2, secondAddress);
+  expect(links).toHaveLength(2);
+  expect(links[0]).toMatchObject({
     url: 'https://github.com/be-dev-yes/yoda',
-    title: expect.any(String),
+    title: fakeTitle.title,
   });
-  expect(result[1]).toMatchObject({
+  expect(links[1]).toMatchObject({
     url: 'https://github.com/sapegin/jest-cheat-sheet',
-    title: expect.any(String),
+    title: fakeTitle.title,
   });
 });

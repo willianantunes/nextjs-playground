@@ -1,3 +1,5 @@
+import { getDetails } from '../services/PageDetailsService';
+
 const extractMentions = message => {
   const mentionRegex = /@(\w+)/g;
   const mentions = [];
@@ -22,10 +24,26 @@ const extractEmoticons = message => {
   return emoticons;
 };
 
+const extractLinks = message => {
+  const linksRegex = /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))/g;
+  const links = [];
+  let matchedContent;
+
+  while ((matchedContent = linksRegex.exec(message))) {
+    const urlFound = matchedContent[1];
+    const { title } = getDetails(urlFound);
+    if (title) {
+      links.push({ url: urlFound, title });
+    }
+  }
+
+  return links;
+};
+
 export function evaluate(message) {
   const mentions = extractMentions(message);
   const emoticons = extractEmoticons(message);
-  const links = undefined;
+  const links = extractLinks(message);
 
   return {
     mentions,
