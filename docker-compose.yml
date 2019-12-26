@@ -6,17 +6,19 @@ services:
     env_file: .env
     ports:
       - "${NEXTJS_BIND_PORT}:${NEXTJS_BIND_PORT}"
-  unit-tests:
+  unit-test:
     image: node:12.14.0-alpine
     env_file: .env
     working_dir: /app
     volumes:
       - .:/app
-    command: npm run test-unit
-  int-tests:
+    command: >
+      sh -c "npm ci && npm run unit-test"
+  int-test:
     image: node:12.14.0-alpine
     env_file: .env
     working_dir: /app
     volumes:
       - .:/app
-    command: npm run test-int
+    command: >
+      sh -c "npm ci && npm run int-test"
