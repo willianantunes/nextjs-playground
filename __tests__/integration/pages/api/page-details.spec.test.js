@@ -2,7 +2,7 @@ import http from 'http';
 import fetch from 'isomorphic-unfetch';
 import listen from 'test-listen';
 import { apiResolver } from 'next/dist/next-server/server/api-utils';
-import { handler } from '../../../../src/pages/api/page-details';
+import handler from '../../../../src/pages/api/page-details';
 
 describe('Integrations tests for page-service endpoint', () => {
   let server;
