@@ -1,4 +1,3 @@
-require('dotenv').config();
 import * as httpService from '../infra/Http';
 
 const endpoint = process.env.API_TVMAZE_ENDPOINT;
