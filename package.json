@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest ./__tests__ --testPathIgnorePatterns support/*",
     "unit-test": "jest ./__tests__/unit",
     "int-test": "jest ./__tests__/integration",
     "dev": "next ./src",

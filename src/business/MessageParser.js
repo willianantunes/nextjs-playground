@@ -24,14 +24,14 @@ const extractEmoticons = message => {
   return emoticons;
 };
 
-const extractLinks = message => {
+const extractLinks = async message => {
   const linksRegex = /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))/g;
   const links = [];
   let matchedContent;
 
   while ((matchedContent = linksRegex.exec(message))) {
     const urlFound = matchedContent[1];
-    const { title } = getDetails(urlFound);
+    const { title } = await getDetails(urlFound);
     if (title) {
       links.push({ url: urlFound, title });
     }
@@ -40,10 +40,10 @@ const extractLinks = message => {
   return links;
 };
 
-export function evaluate(message) {
+export default async function evaluate(message) {
   const mentions = extractMentions(message);
   const emoticons = extractEmoticons(message);
-  const links = extractLinks(message);
+  const links = await extractLinks(message);
 
   return {
     mentions,
