@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/willianantunes/nextjs-playground#readme",
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "bootstrap-css-only": "^4.3.1",
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^1.7.0",
     "isomorphic-unfetch": "^3.0.0",
@@ -32,7 +34,8 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-markdown": "^4.2.2",
-    "url-polyfill": "^1.1.7"
+    "url-polyfill": "^1.1.7",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "babel-jest": "^24.9.0",

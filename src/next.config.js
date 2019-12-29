@@ -1,10 +1,11 @@
 require('dotenv').config();
 
+const withCSS = require('@zeit/next-css');
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
 // https://nextjs.org/docs#custom-configuration
-module.exports = {
+const setup = {
   // https://nextjs.org/docs#setting-a-custom-build-directory
   distDir: '../dist',
   webpack: (cfg, { isServer }) => {
@@ -36,3 +37,5 @@ module.exports = {
     return cfg;
   },
 };
+
+module.exports = withCSS(setup);
