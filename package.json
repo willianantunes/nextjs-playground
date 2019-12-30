@@ -40,6 +40,7 @@
   "devDependencies": {
     "babel-jest": "^24.9.0",
     "enzyme": "^3.11.0",
+    "fake-indexeddb": "^3.0.0",
     "jest": "^24.9.0",
     "mockserver": "^3.1.1",
     "prettier": "^1.19.1",
