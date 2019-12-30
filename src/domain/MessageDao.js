@@ -30,6 +30,19 @@ export const save = async (message = required('message')) => {
   });
 };
 
+export const update = async (message = required('message')) => {
+  let connection = await getConnection();
+  return new Promise((resolve, reject) => {
+    const request = connection
+        .transaction([storeName], 'readwrite')
+        .objectStore(storeName)
+        .put(message, message.id);
+
+    request.onsuccess = e => resolve();
+    request.onerror = e => reject(`The message could not me updated. Reason: ${e}`);
+  });
+};
+
 export const findAll = async () => {
   let connection = await getConnection();
   return new Promise((resolve, reject) => {

@@ -1,6 +1,6 @@
 import 'fake-indexeddb/auto';
 import { Message } from '../../../src/domain/Message';
-import { save, findAll, deleteAll } from '../../../src/domain/MessageDao';
+import { save, findAll, deleteAll, update } from '../../../src/domain/MessageDao';
 
 beforeEach(async done => {
   await deleteAll();
@@ -17,6 +17,24 @@ test('Should save message and list it afterwards', async () => {
   expect(listOfMessages[0]).toMatchObject({
     _id: expect.any(Number),
     _original: message.original,
+    _parsed: message.parsed,
+  });
+});
+
+test('Should save message and update it with a new value', async () => {
+  const message = new Message(null, 'Some message', 'Some parsed message');
+
+  await save(message);
+  const firstListOfMessages = await findAll();
+  const updatedMessage = new Message(firstListOfMessages[0].id, 'Some message updated', message.parsed);
+
+  await update(updatedMessage);
+  const secondListOfMessages = await findAll();
+
+  expect(secondListOfMessages).toHaveLength(1);
+  expect(secondListOfMessages[0]).toMatchObject({
+    _id: expect.any(Number),
+    _original: updatedMessage.original,
     _parsed: message.parsed,
   });
 });
