@@ -22,3 +22,11 @@ services:
       - .:/app
     command: >
       sh -c "npm ci && npm run int-test"
+  all-test:
+    image: node:12.14.0-alpine
+    env_file: .env
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: >
+      sh -c "npm ci && npm run test"
