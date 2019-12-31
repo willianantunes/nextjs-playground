@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import evaluate from '../business/MessageParser';
-import uuidv4 from 'uuid/v4';
 import Link from 'next/link';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import * as messageDao from '../domain/MessageDao';
