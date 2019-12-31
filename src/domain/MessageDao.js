@@ -25,7 +25,10 @@ export const save = async (message = required('message')) => {
       .objectStore(storeName)
       .add(message);
 
-    request.onsuccess = e => resolve();
+    request.onsuccess = e => {
+      const generatedKey = e.target.result;
+      resolve(new Message(generatedKey, message.original, message.parsed));
+    };
     request.onerror = e => reject(`The message could not me saved. Reason: ${e}`);
   });
 };
@@ -34,11 +37,14 @@ export const update = async (message = required('message')) => {
   let connection = await getConnection();
   return new Promise((resolve, reject) => {
     const request = connection
-        .transaction([storeName], 'readwrite')
-        .objectStore(storeName)
-        .put(message, message.id);
+      .transaction([storeName], 'readwrite')
+      .objectStore(storeName)
+      .put(message, message.id);
 
-    request.onsuccess = e => resolve();
+    request.onsuccess = e => {
+      const generatedKey = e.target.result;
+      resolve(new Message(generatedKey, message.original, message.parsed));
+    };
     request.onerror = e => reject(`The message could not me updated. Reason: ${e}`);
   });
 };

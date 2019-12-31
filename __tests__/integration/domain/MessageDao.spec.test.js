@@ -10,7 +10,7 @@ beforeEach(async done => {
 test('Should save message and list it afterwards', async () => {
   const message = new Message(null, 'Some message', 'Some parsed message');
 
-  await save(message);
+  const persistedMessage = await save(message);
   const listOfMessages = await findAll();
 
   expect(listOfMessages).toHaveLength(1);
@@ -18,6 +18,11 @@ test('Should save message and list it afterwards', async () => {
     _id: expect.any(Number),
     _original: message.original,
     _parsed: message.parsed,
+  });
+  expect(listOfMessages[0]).toMatchObject({
+    _id: persistedMessage.id,
+    _original: persistedMessage.original,
+    _parsed: persistedMessage.parsed,
   });
 });
 
@@ -28,7 +33,7 @@ test('Should save message and update it with a new value', async () => {
   const firstListOfMessages = await findAll();
   const updatedMessage = new Message(firstListOfMessages[0].id, 'Some message updated', message.parsed);
 
-  await update(updatedMessage);
+  const persistedUpdatedMessage = await update(updatedMessage);
   const secondListOfMessages = await findAll();
 
   expect(secondListOfMessages).toHaveLength(1);
@@ -36,6 +41,11 @@ test('Should save message and update it with a new value', async () => {
     _id: expect.any(Number),
     _original: updatedMessage.original,
     _parsed: message.parsed,
+  });
+  expect(secondListOfMessages[0]).toMatchObject({
+    _id: persistedUpdatedMessage.id,
+    _original: persistedUpdatedMessage.original,
+    _parsed: persistedUpdatedMessage.parsed,
   });
 });
 
