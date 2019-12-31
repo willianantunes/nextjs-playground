@@ -1,7 +1,6 @@
+import StandardLayout from '../components/StandardLayout';
 import { Component } from 'react';
 import evaluate from '../business/MessageParser';
-import Link from 'next/link';
-import 'bootstrap-css-only/css/bootstrap.min.css';
 import * as messageDao from '../domain/MessageDao';
 import { Message } from '../domain/Message';
 
@@ -58,26 +57,7 @@ class Index extends Component {
 
   render = () => {
     return (
-      <div>
-        <header>
-          <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
-            <Link href='/'>
-              <a className='navbar-brand'>Next.JS Playground Project</a>
-            </Link>
-            <div className='collapse navbar-collapse' id='navbarCollapse'>
-              <ul className='navbar-nav mr-auto'>
-                <Link href='/'>
-                  <a className='nav-item active nav-link'>
-                    Home <span className='sr-only'>(current)</span>
-                  </a>
-                </Link>
-                <Link href='/batman'>
-                  <a className='nav-item nav-link'>Batman shows</a>
-                </Link>
-              </ul>
-            </div>
-          </nav>
-        </header>
+      <StandardLayout>
         <main className='container'>
           <div className='row justify-content-center'>
             <h1>Challenge answer</h1>
@@ -114,7 +94,7 @@ class Index extends Component {
             })}
           </div>
         </main>
-      </div>
+      </StandardLayout>
     );
   };
 }

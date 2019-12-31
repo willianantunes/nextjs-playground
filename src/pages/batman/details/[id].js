@@ -1,12 +1,26 @@
-import Layout from '../../../components/MyLayout';
+import Router from 'next/router';
+import StandardLayout from '../../../components/StandardLayout';
+import { stripHtmlFromText } from '../../../infra/Utils';
 import * as tvmazeService from '../../../services/TVMazeService';
 
 const Post = props => (
-  <Layout>
-    <h1>{props.show.name}</h1>
-    <p>{props.show.summary.replace(/<[/]?p>/g, '')}</p>
-    <img src={props.show.image.medium} />
-  </Layout>
+  <StandardLayout>
+    <div className='row justify-content-center'>
+      <h1>{props.show.name}</h1>
+    </div>
+    <div className='row justify-content-center'>
+      <div className='card text-center w-25 align-content-center'>
+        <img className='card-img-top' src={props.show.image.medium} />
+        <div className='card-body'>
+          <p className='card-text'>{stripHtmlFromText(props.show.summary)}</p>
+          <button onClick={() => Router.back()} className='btn btn-primary'>
+            Go back
+          </button>
+        </div>
+        <div className='card-footer text-muted'>{props.show.genres.join(' | ')}</div>
+      </div>
+    </div>
+  </StandardLayout>
 );
 
 Post.getInitialProps = async context => {
