@@ -3,6 +3,8 @@ import evaluate from '../business/MessageParser';
 import uuidv4 from 'uuid/v4';
 import Link from 'next/link';
 import 'bootstrap-css-only/css/bootstrap.min.css';
+import * as messageDao from '../domain/MessageDao';
+import { Message } from '../domain/Message';
 
 class Index extends Component {
   constructor() {
@@ -16,12 +18,23 @@ class Index extends Component {
       'Hey @Aladdin and @Genie, you wanna help on your (nose)?! Know more accessing https://gist.github.com/willianantunes',
   });
 
+  componentDidMount = () => {
+    messageDao.findAll().then(messages =>
+      this.setState({
+        messages,
+      }),
+    );
+  };
+
   sendForm = async event => {
     event.preventDefault();
-    const value = await evaluate(this.state.configuredMessage);
-    this.setState({
-      messages: this.state.messages.concat({ id: uuidv4(), original: this.state.configuredMessage, parsed: value }),
-      configuredMessage: '',
+    const configuredMessage = this.state.configuredMessage;
+    const parsedMessaged = await evaluate(configuredMessage);
+    messageDao.save(new Message(null, configuredMessage, parsedMessaged)).then(persistedMessage => {
+      this.setState({
+        messages: this.state.messages.concat(persistedMessage),
+        configuredMessage: '',
+      });
     });
   };
 
@@ -31,7 +44,17 @@ class Index extends Component {
 
   cleanAllMessages = event => {
     event.preventDefault();
-    this.setState({ messages: [], configuredMessage: '' });
+    messageDao.deleteAll().then(() => this.setState(this.initialState()));
+  };
+
+  deleteMessage = event => {
+    event.preventDefault();
+    const messageId = parseInt(event.currentTarget.parentNode.getAttribute('data-key'));
+    messageDao.deleteById(messageId).then(result => {
+      this.setState({
+        messages: this.state.messages.filter(message => message.id !== messageId),
+      });
+    });
   };
 
   render = () => {
@@ -81,9 +104,12 @@ class Index extends Component {
           <div className='list-group pt-3'>
             {this.state.messages.map(message => {
               return (
-                <div className='list-group-item list-group-item-action' key={message.id}>
+                <div className='list-group-item list-group-item-action' key={message.id} data-key={message.id}>
                   <p className='mb-1'>{message.original}</p>
                   <small>{JSON.stringify(message.parsed)}</small>
+                  <button className='close' onClick={this.deleteMessage}>
+                    <span aria-hidden='true'>&times;</span>
+                  </button>
                 </div>
               );
             })}
