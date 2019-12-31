@@ -1,6 +1,6 @@
 import 'fake-indexeddb/auto';
 import { Message } from '../../../src/domain/Message';
-import { save, findAll, deleteAll, update } from '../../../src/domain/MessageDao';
+import { save, findAll, deleteAll, update, deleteById } from '../../../src/domain/MessageDao';
 
 beforeEach(async done => {
   await deleteAll();
@@ -49,7 +49,7 @@ test('Should save message and update it with a new value', async () => {
   });
 });
 
-test('Should save two message, list them, erase the store and list it again ', async () => {
+test('Should save two messages, list them, erase the store and list it again ', async () => {
   const messageOne = new Message(null, 'Some message 1', 'Some parsed message 1');
   const messageTwo = new Message(null, 'Some message 2', 'Some parsed message 2');
 
@@ -73,4 +73,24 @@ test('Should save two message, list them, erase the store and list it again ', a
   const secondListOfMessages = await findAll();
 
   expect(secondListOfMessages).toHaveLength(0);
+});
+
+test('Should save two messages, delete only one given its ID and list the store afterwards', async () => {
+  const messageOne = new Message(null, 'Some message 1', 'Some parsed message 1');
+  const messageTwo = new Message(null, 'Some message 2', 'Some parsed message 2');
+
+  const persistedMessageOne = await save(messageOne);
+  const persistedMessageTwo = await save(messageTwo);
+
+  const firstItWasDeleted = await deleteById(persistedMessageOne.id);
+  const listOfMessages = await findAll();
+
+  expect(listOfMessages).toHaveLength(1);
+  expect(firstItWasDeleted).toBe(true);
+
+  const fakeId = 9999;
+  const secondItWasDeleted = await deleteById(fakeId);
+
+  expect(listOfMessages).toHaveLength(1);
+  expect(secondItWasDeleted).toBe(false);
 });

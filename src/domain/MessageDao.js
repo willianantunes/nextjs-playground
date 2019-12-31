@@ -17,6 +17,22 @@ async function getConnection() {
   }
 }
 
+export const exists = async id => {
+  let connection = await getConnection();
+  return new Promise((resolve, reject) => {
+    const request = connection
+      .transaction([storeName], 'readwrite')
+      .objectStore(storeName)
+      .get(id);
+
+    request.onsuccess = e => {
+      if (e.target.result != null) resolve(true);
+      else resolve(false);
+    };
+    request.onerror = e => reject(`The message could not me saved. Reason: ${e}`);
+  });
+};
+
 export const save = async (message = required('message')) => {
   let connection = await getConnection();
   return new Promise((resolve, reject) => {
@@ -87,6 +103,22 @@ export const deleteAll = async () => {
       .clear();
 
     request.onsuccess = e => resolve();
+    request.onerror = e => reject('Messages could not be deleted. Reason: ${e}');
+  });
+};
+
+export const deleteById = async id => {
+  let connection = await getConnection();
+  return new Promise(async (resolve, reject) => {
+    const objectExists = await exists(id);
+    if (!objectExists) resolve(false);
+
+    const request = connection
+      .transaction([storeName], 'readwrite')
+      .objectStore(storeName)
+      .delete(id);
+
+    request.onsuccess = async e => resolve(true);
     request.onerror = e => reject('Messages could not be deleted. Reason: ${e}');
   });
 };
