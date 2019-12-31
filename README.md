@@ -70,6 +70,16 @@ For example, calling your function with the following inputs should result in th
         }
       ]
     }
+    
+## How to run and test it
+
+Run it:
+
+    docker-compose up app
+    
+Execute the following to test everything:
+
+    docker-compose up all-test
 
 ## Useful links
 
