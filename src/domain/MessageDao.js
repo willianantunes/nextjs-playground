@@ -80,7 +80,7 @@ export const findAll = async () => {
 
       if (currentPosition) {
         const foundObject = currentPosition.value;
-        const message = new Message(currentPosition._key, foundObject._original, foundObject._parsed);
+        const message = new Message(currentPosition.key, foundObject._original, foundObject._parsed);
         listOfMessages.push(message);
         currentPosition.continue();
       } else {
