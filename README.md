@@ -1,10 +1,39 @@
 # Next.JS Playground
 
+![](https://github.com/willianantunes/nextjs-playground/workflows/.github/workflows/build-publish.yml/badge.svg)
+
 First I use it to test Next.JS and its various features. I had a big headache to configure Jest with it in order to work properly but now everything seems OK. 
 
 Well here you'll see my solution for a **code-challenge** which I believe is not used anymore as it is old, maybe if you search for it you may find it somewhere in GitHub.
 
 As always I'm following [Yoda's philosophy](https://github.com/be-dev-yes/yoda), that's why this project exists.
+
+## Run NOW with Docker
+
+Simply execute:
+
+    docker run -itd --name nextjs-playground \
+    -p 3000:3000 \
+    -e NEXTJS_BIND_PORT=3000 \
+    -e API_TVMAZE_ENDPOINT=https://api.tvmaze.com \
+    -e PAGE_DETAILS_ENDPOINT=http://localhost:3000/api/page-details \
+    willianantunes/nextjs-playground
+
+Access on your browser: http://localhost:3000
+
+See the logs:
+
+    docker logs -f nextjs-playground
+
+## How to run and test it locally
+
+Run it:
+
+    docker-compose up app
+    
+Execute the following to test everything:
+
+    docker-compose up all-test
 
 ## Challenge details
 
@@ -70,16 +99,6 @@ For example, calling your function with the following inputs should result in th
         }
       ]
     }
-    
-## How to run and test it
-
-Run it:
-
-    docker-compose up app
-    
-Execute the following to test everything:
-
-    docker-compose up all-test
 
 ## Useful links
 
