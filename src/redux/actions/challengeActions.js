@@ -1,0 +1,52 @@
+import * as messageDao from '../../domain/MessageDao';
+import evaluate from '../../business/MessageParser';
+import { Message } from '../../domain/Message';
+
+export const types = {
+  DELETING_MESSAGE: 'DELETING_MESSAGE',
+  MESSAGE_DELETED: 'MESSAGE_DELETED',
+  DELETING_MESSAGES: 'DELETING_MESSAGES',
+  MESSAGES_DELETED: 'MESSAGES_DELETED',
+  ADDING_MESSAGE: 'ADDING_MESSAGE',
+  MESSAGE_ADDED: 'MESSAGE_ADDED',
+  LISTING_MESSAGES: 'LISTING_MESSAGES',
+  MESSAGE_LISTED: 'MESSAGE_LISTED',
+};
+
+export function deleteMessage(id) {
+  return dispatch => {
+    dispatch({ type: types.DELETING_MESSAGE });
+
+    return messageDao.deleteById(id).then(res => dispatch({ type: types.MESSAGE_DELETED, payload: id }));
+  };
+}
+
+export function deleteAllMessages() {
+  return dispatch => {
+    dispatch({ type: types.DELETING_MESSAGES });
+
+    return messageDao.deleteAll().then(() => dispatch({ type: types.MESSAGES_DELETED }));
+  };
+}
+
+export function addMessage(configuredMessage, done = () => {}) {
+  return async dispatch => {
+    dispatch({ type: types.ADDING_MESSAGE });
+
+    const parsedMessaged = await evaluate(configuredMessage);
+    const messageToBePersisted = new Message(null, configuredMessage, parsedMessaged);
+
+    return messageDao.save(messageToBePersisted).then(persistedMessage => {
+      dispatch({ type: types.MESSAGE_ADDED, payload: persistedMessage });
+      done();
+    });
+  };
+}
+
+export function listMessages() {
+  return dispatch => {
+    dispatch({ type: types.LISTING_MESSAGES });
+
+    return messageDao.findAll().then(messages => dispatch({ type: types.MESSAGE_LISTED, payload: messages }));
+  };
+}
