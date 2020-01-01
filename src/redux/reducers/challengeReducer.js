@@ -1,4 +1,4 @@
-import * as ActionType from '../actions/challengeActions';
+import { types } from '../actions/challengeActions';
 
 export const initialState = {
   messages: [],
@@ -6,45 +6,45 @@ export const initialState = {
 
 export default function challengeReducer(state = initialState, action) {
   switch (action.type) {
-    case ActionType.DELETING_MESSAGE:
+    case types.DELETING_MESSAGE:
       return {
         ...state,
         isLoading: true,
       };
-    case ActionType.MESSAGE_DELETED:
+    case types.MESSAGE_DELETED:
       return {
         ...state,
         isLoading: false,
         messages: state.messages.filter(message => message.id !== action.payload),
       };
-    case ActionType.DELETING_MESSAGES:
+    case types.DELETING_MESSAGES:
       return {
         ...state,
         isLoading: true,
       };
-    case ActionType.MESSAGES_DELETED:
+    case types.MESSAGES_DELETED:
       return {
         ...state,
         isLoading: false,
         messages: [],
       };
-    case ActionType.ADDING_MESSAGE:
+    case types.ADDING_MESSAGE:
       return {
         ...state,
         isLoading: true,
       };
-    case ActionType.MESSAGE_ADDED:
+    case types.MESSAGE_ADDED:
       return {
         ...state,
         isLoading: false,
         messages: state.messages.concat(action.payload),
       };
-    case ActionType.LISTING_MESSAGES:
+    case types.LISTING_MESSAGES:
       return {
         ...state,
         isLoading: true,
       };
-    case ActionType.MESSAGE_LISTED:
+    case types.MESSAGE_LISTED:
       return {
         ...state,
         isLoading: false,
