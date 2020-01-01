@@ -26,7 +26,7 @@ describe('All tests regarding mentions', () => {
   });
 });
 
-describe('All tests regarding emoticons', async () => {
+describe('All tests regarding emoticons', () => {
   test('Should show 1 emoticon given some was pointed out', async () => {
     const { emoticons } = await evaluate("Then I look down, and I realize there's a phone... there (grinning-face)");
 
