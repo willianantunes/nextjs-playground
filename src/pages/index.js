@@ -1,8 +1,8 @@
 import StandardLayout from '../components/StandardLayout';
+import ListOfMessages from '../components/challenge/ListOfMessages';
 import { Component } from 'react';
-import evaluate from '../business/MessageParser';
-import * as messageDao from '../domain/MessageDao';
-import { Message } from '../domain/Message';
+import { connect } from 'react-redux';
+import { deleteAllMessages, addMessage } from '../redux/actions/challengeActions';
 
 class Index extends Component {
   constructor() {
@@ -11,48 +11,30 @@ class Index extends Component {
   }
 
   initialState = () => ({
-    messages: [],
     configuredMessage:
       'Hey @Aladdin and @Genie, you wanna help on your (nose)?! Know more accessing https://gist.github.com/willianantunes',
   });
 
-  componentDidMount = () => {
-    messageDao.findAll().then(messages =>
-      this.setState({
-        messages,
-      }),
-    );
-  };
-
   sendForm = async event => {
     event.preventDefault();
     const configuredMessage = this.state.configuredMessage;
-    const parsedMessaged = await evaluate(configuredMessage);
-    messageDao.save(new Message(null, configuredMessage, parsedMessaged)).then(persistedMessage => {
-      this.setState({
-        messages: this.state.messages.concat(persistedMessage),
-        configuredMessage: '',
-      });
-    });
-  };
-
-  setConfiguredMessage = event => {
-    this.setState({ configuredMessage: event.target.value });
+    this.props.dispatch(
+      addMessage(configuredMessage, () =>
+        this.setState({
+          ...this.state,
+          configuredMessage: '',
+        }),
+      ),
+    );
   };
 
   cleanAllMessages = event => {
     event.preventDefault();
-    messageDao.deleteAll().then(() => this.setState(this.initialState()));
+    this.props.dispatch(deleteAllMessages());
   };
 
-  deleteMessage = event => {
-    event.preventDefault();
-    const messageId = parseInt(event.currentTarget.parentNode.getAttribute('data-key'));
-    messageDao.deleteById(messageId).then(result => {
-      this.setState({
-        messages: this.state.messages.filter(message => message.id !== messageId),
-      });
-    });
+  setConfiguredMessage = event => {
+    this.setState({ ...this.state, configuredMessage: event.target.value });
   };
 
   render = () => {
@@ -79,24 +61,25 @@ class Index extends Component {
             <button className='btn btn-secondary ml-2' onClick={this.cleanAllMessages}>
               Clear results
             </button>
-          </form>
-          <div className='list-group pt-3'>
-            {this.state.messages.map(message => {
-              return (
-                <div className='list-group-item list-group-item-action' key={message.id} data-key={message.id}>
-                  <p className='mb-1'>{message.original}</p>
-                  <small>{JSON.stringify(message.parsed)}</small>
-                  <button className='close' onClick={this.deleteMessage}>
-                    <span aria-hidden='true'>&times;</span>
-                  </button>
+            {this.props.challengeReducer.isLoading && (
+              <div className='d-flex justify-content-center m-3'>
+                <div className='spinner-border' role='status'>
+                  <span className='sr-only'>Loading...</span>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            )}
+          </form>
+          <ListOfMessages />
         </main>
       </StandardLayout>
     );
   };
 }
 
-export default Index;
+function mapStateToProps(state) {
+  return {
+    challengeReducer: state.challengeReducer,
+  };
+}
+
+export default connect(mapStateToProps)(Index);
