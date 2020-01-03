@@ -1,6 +1,6 @@
 # Next.JS Playground
 
-![Actions Status](https://github.com/willianantunes/nextjs-playground/workflows/Build+and+publish/badge.svg)
+![Actions Status](https://github.com/willianantunes/nextjs-playground/workflows/Build%20and%20publish/badge.svg)
 
 First I use it to test Next.JS and its various features. I had a big headache to configure Jest with it in order to work properly but now everything seems OK. 
 
