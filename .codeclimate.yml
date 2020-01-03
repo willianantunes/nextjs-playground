@@ -1,0 +1,6 @@
+exclude_patterns:
+  - "/*.config.js"
+  - "__tests__/"
+  - "dist/"
+  - "node_modules/"
+  - "**/__tests__/"
