@@ -31,6 +31,7 @@
     "dotenv-webpack": "^1.7.0",
     "isomorphic-unfetch": "^3.0.0",
     "jsdom": "^15.2.1",
+    "logplease": "^1.2.15",
     "next": "^9.1.6",
     "next-redux-wrapper": "^4.0.1",
     "react": "^16.12.0",
