@@ -1,4 +1,7 @@
+import Logger from '../infra/logger';
 import { getDetails } from '../services/PageDetailsService';
+
+const logger = Logger('MessageParser');
 
 const extractMentions = message => {
   const mentionRegex = /@(\w+)/g;
@@ -31,8 +34,10 @@ const extractLinks = async message => {
 
   while ((matchedContent = linksRegex.exec(message))) {
     const urlFound = matchedContent[1];
+    logger.debug(`URL found! Now getting its details: ${urlFound}`);
     const { title } = await getDetails(urlFound);
     if (title) {
+      logger.debug('URL found! Now getting its details');
       links.push({ url: urlFound, title });
     }
   }
@@ -41,8 +46,11 @@ const extractLinks = async message => {
 };
 
 export default async function evaluate(message) {
+  logger.info('Extracting mentions...');
   const mentions = extractMentions(message);
+  logger.info('Extracting Emoticons...');
   const emoticons = extractEmoticons(message);
+  logger.info('Extracting links...');
   const links = await extractLinks(message);
 
   return {
