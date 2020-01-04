@@ -27,6 +27,6 @@ export async function showMainInformation(id) {
 
   return httpService.get(showMainInformationEndpoint).then(res => {
     logger.debug('Parsing response as JSON...');
-    res.json();
+    return res.json();
   });
 }
