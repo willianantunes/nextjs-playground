@@ -24,3 +24,22 @@ it('Should create MESSAGE_LISTED when finding all messages has been done', () =>
     expect(mockedStore.getActions()).toEqual(expectedActions);
   });
 });
+
+it('Should create LISTING_MESSAGES_ERROR when an error is caught during finding all messages logic', () => {
+  messageDao.findAll.mockImplementation(() => Promise.reject("Yeah I'm fake"));
+
+  const expectedActions = [
+    {
+      type: 'LISTING_MESSAGES',
+    },
+    {
+      type: 'LISTING_MESSAGES_ERROR',
+    },
+  ];
+  const mockedStore = mockStore({});
+
+  return mockedStore.dispatch(actions.listMessages()).then(() => {
+    expect(messageDao.findAll).toHaveBeenCalled();
+    expect(mockedStore.getActions()).toEqual(expectedActions);
+  });
+});
