@@ -61,6 +61,11 @@ class Index extends Component {
             <button className='btn btn-secondary ml-2' onClick={this.cleanAllMessages}>
               Clear results
             </button>
+            {this.props.challengeReducer.isError && (
+              <div className='alert alert-danger m-3 text-center' role='alert'>
+                A problem happened during your request. Try again later
+              </div>
+            )}
             {this.props.challengeReducer.isLoading && (
               <div className='d-flex justify-content-center m-3'>
                 <div className='spinner-border' role='status'>
