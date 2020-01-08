@@ -7,9 +7,7 @@ function ListOfMessages(props) {
     props.dispatch(listMessages());
   }, []);
 
-  function deleteMessage(event) {
-    event.preventDefault();
-    const messageId = parseInt(event.currentTarget.parentNode.getAttribute('data-key'));
+  function deleteMessage(messageId) {
     props.dispatch(excludeMessage(messageId));
   }
 
@@ -17,10 +15,10 @@ function ListOfMessages(props) {
     <div className='list-group pt-3'>
       {props.messages.map(message => {
         return (
-          <div className='list-group-item list-group-item-action' key={message.id} data-key={message.id}>
+          <div className='list-group-item list-group-item-action' key={message.id}>
             <p className='mb-1'>{message.original}</p>
             <small>{JSON.stringify(message.parsed)}</small>
-            <button className='close' onClick={deleteMessage}>
+            <button className='close' onClick={() => deleteMessage(message.id)}>
               <span aria-hidden='true'>&times;</span>
             </button>
           </div>
