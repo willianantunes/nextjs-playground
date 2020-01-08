@@ -3,7 +3,7 @@ FROM node:12-alpine as build
 WORKDIR /app
 COPY . /app
 
-# I don't know why but Next.JS require devDependencies to build the project
+# Next.JS requires devDependencies to build the project
 RUN npm ci --only=production
 RUN cp -R node_modules prod_node_modules
 RUN npm ci && npm run build
