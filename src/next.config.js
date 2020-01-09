@@ -1,8 +1,8 @@
-require('dotenv').config();
+require('dotenv').config()
 
-const withCSS = require('@zeit/next-css');
-const path = require('path');
-const Dotenv = require('dotenv-webpack');
+const withCSS = require('@zeit/next-css')
+const path = require('path')
+const Dotenv = require('dotenv-webpack')
 
 // https://nextjs.org/docs#custom-configuration
 const setup = {
@@ -12,30 +12,30 @@ const setup = {
     // Fixes npm packages that depend on `fs` module
     if (!isServer) {
       cfg.node = {
-        fs: 'empty',
-      };
+        fs: 'empty'
+      }
     }
-    cfg.plugins = cfg.plugins || [];
+    cfg.plugins = cfg.plugins || []
     cfg.plugins = [
       ...cfg.plugins,
       new Dotenv({
         path: path.join(path.dirname(__dirname), '.env'),
-        systemvars: true,
-      }),
-    ];
-    const originalEntry = cfg.entry;
+        systemvars: true
+      })
+    ]
+    const originalEntry = cfg.entry
     cfg.entry = async () => {
-      const entries = await originalEntry();
-      const urlPolyfill = './infra/Polyfill.js';
+      const entries = await originalEntry()
+      const urlPolyfill = './infra/Polyfill.js'
       if (entries['main.js'] && !entries['main.js'].includes(urlPolyfill)) {
         // https://github.com/zeit/next.js/blob/6ddb5ee3416ae027c8ecc82ab581ef7ae952ca77/examples/with-polyfills/next.config.js#L11
-        entries['main.js'].unshift(urlPolyfill);
+        entries['main.js'].unshift(urlPolyfill)
       }
-      return entries;
-    };
+      return entries
+    }
 
-    return cfg;
-  },
-};
+    return cfg
+  }
+}
 
-module.exports = withCSS(setup);
+module.exports = withCSS(setup)

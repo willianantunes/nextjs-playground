@@ -17,3 +17,5 @@ jobs:
       run: |
         npm ci
         npm test
+    - name: check lint rules according to standard
+      run: npm run standard

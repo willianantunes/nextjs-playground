@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { deleteMessage as excludeMessage, listMessages } from '../../redux/actions/challengeActions';
+import { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { deleteMessage as excludeMessage, listMessages } from '../../redux/actions/challengeActions'
 
-function ListOfMessages(props) {
+function ListOfMessages (props) {
   useEffect(() => {
-    props.dispatch(listMessages());
-  }, []);
+    props.dispatch(listMessages())
+  }, [])
 
-  function deleteMessage(messageId) {
-    props.dispatch(excludeMessage(messageId));
+  function deleteMessage (messageId) {
+    props.dispatch(excludeMessage(messageId))
   }
 
   return (
@@ -22,16 +22,16 @@ function ListOfMessages(props) {
               <span aria-hidden='true'>&times;</span>
             </button>
           </div>
-        );
+        )
       })}
     </div>
-  );
+  )
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
-    messages: state.challengeReducer.messages,
-  };
+    messages: state.challengeReducer.messages
+  }
 }
 
-export default connect(mapStateToProps)(ListOfMessages);
+export default connect(mapStateToProps)(ListOfMessages)

@@ -1,7 +1,7 @@
-import StandardLayout from '../../components/StandardLayout';
-import Link from 'next/link';
-import * as tvmazeService from '../../services/TVMazeService';
-import { useItIfDefinedOtherwise, stripHtmlFromText, truncateText } from '../../infra/Utils';
+import StandardLayout from '../../components/StandardLayout'
+import Link from 'next/link'
+import * as tvmazeService from '../../services/TVMazeService'
+import { useItIfDefinedOtherwise, stripHtmlFromText, truncateText } from '../../infra/Utils'
 
 const Index = props => (
   <StandardLayout>
@@ -25,14 +25,14 @@ const Index = props => (
       </div>
     </main>
   </StandardLayout>
-);
+)
 
 Index.getInitialProps = async () => {
-  const data = await tvmazeService.showSearch('batman');
+  const data = await tvmazeService.showSearch('batman')
 
   return {
-    shows: data.map(entry => entry.show),
-  };
-};
+    shows: data.map(entry => entry.show)
+  }
+}
 
-export default Index;
+export default Index
