@@ -1,16 +1,16 @@
-import dns from 'dns';
+import dns from 'dns'
 
-export default async function handler(request, response) {
+export default async function handler (request, response) {
   dns.promises
     .lookup('github.com')
     .then(() =>
       response.json({
-        internetAvailable: true,
-      }),
+        internetAvailable: true
+      })
     )
     .catch(() =>
       response.status(503).json({
-        internetAvailable: false,
-      }),
-    );
+        internetAvailable: false
+      })
+    )
 }

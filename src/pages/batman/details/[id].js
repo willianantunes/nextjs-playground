@@ -1,7 +1,8 @@
-import Router from 'next/router';
-import StandardLayout from '../../../components/StandardLayout';
-import { stripHtmlFromText } from '../../../infra/Utils';
-import * as tvmazeService from '../../../services/TVMazeService';
+import Router from 'next/router'
+import React from 'react'
+import StandardLayout from '../../../components/StandardLayout'
+import { stripHtmlFromText } from '../../../infra/Utils'
+import * as tvmazeService from '../../../services/TVMazeService'
 
 const Post = props => (
   <StandardLayout>
@@ -21,12 +22,12 @@ const Post = props => (
       </div>
     </div>
   </StandardLayout>
-);
+)
 
 Post.getInitialProps = async context => {
-  const { id } = context.query;
-  const show = await tvmazeService.showMainInformation(id);
-  return { show };
-};
+  const { id } = context.query
+  const show = await tvmazeService.showMainInformation(id)
+  return { show }
+}
 
-export default Post;
+export default Post

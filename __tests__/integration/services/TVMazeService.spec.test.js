@@ -1,19 +1,19 @@
-import * as tvmazeService from '../../../src/services/TVMazeService';
+import * as tvmazeService from '../../../src/services/TVMazeService'
 
 test('Should search for show given the provided name and return a fixed list of 10 items', async () => {
-  let result = await tvmazeService.showSearch('batman');
+  const result = await tvmazeService.showSearch('batman')
 
-  expect(result).toHaveLength(10);
-  let someFoundShow = result[0];
-  expect(typeof someFoundShow.score).toBe('number');
-  expect(typeof someFoundShow.show.id).toBe('number');
-  expect(typeof someFoundShow.show.name).toBe('string');
-  expect(someFoundShow.show.name).toBe('Batman');
-  expect(typeof someFoundShow.show.summary).toBe('string');
-});
+  expect(result).toHaveLength(10)
+  const someFoundShow = result[0]
+  expect(typeof someFoundShow.score).toBe('number')
+  expect(typeof someFoundShow.show.id).toBe('number')
+  expect(typeof someFoundShow.show.name).toBe('string')
+  expect(someFoundShow.show.name).toBe('Batman')
+  expect(typeof someFoundShow.show.summary).toBe('string')
+})
 
 test('Should get details from the show given its ID', async () => {
-  let result = await tvmazeService.showMainInformation(481);
+  const result = await tvmazeService.showMainInformation(481)
 
   expect(result).toMatchObject({
     id: 481,
@@ -28,10 +28,10 @@ test('Should get details from the show given its ID', async () => {
     officialSite: null,
     schedule: {
       time: '10:30',
-      days: ['Saturday'],
+      days: ['Saturday']
     },
     rating: {
-      average: 8.5,
+      average: 8.5
     },
     weight: expect.any(Number),
     network: {
@@ -40,28 +40,28 @@ test('Should get details from the show given its ID', async () => {
       country: {
         name: 'United States',
         code: 'US',
-        timezone: 'America/New_York',
-      },
+        timezone: 'America/New_York'
+      }
     },
     webChannel: null,
     externals: {
       tvrage: 5602,
       thetvdb: 73180,
-      imdb: 'tt0398417',
+      imdb: 'tt0398417'
     },
     image: {
       medium: 'http://static.tvmaze.com/uploads/images/medium_portrait/3/9370.jpg',
-      original: 'http://static.tvmaze.com/uploads/images/original_untouched/3/9370.jpg',
+      original: 'http://static.tvmaze.com/uploads/images/original_untouched/3/9370.jpg'
     },
     summary: expect.stringMatching(/Hidden/),
     updated: expect.any(Number),
     _links: {
       self: {
-        href: 'http://api.tvmaze.com/shows/481',
+        href: 'http://api.tvmaze.com/shows/481'
       },
       previousepisode: {
-        href: 'http://api.tvmaze.com/episodes/43721',
-      },
-    },
-  });
-});
+        href: 'http://api.tvmaze.com/episodes/43721'
+      }
+    }
+  })
+})

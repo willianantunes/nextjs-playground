@@ -3,6 +3,7 @@
 ![Actions Status](https://github.com/willianantunes/nextjs-playground/workflows/Build%20and%20publish/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f6dd63e6e10ef73de838/maintainability)](https://codeclimate.com/github/willianantunes/nextjs-playground/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/f6dd63e6e10ef73de838/test_coverage)](https://codeclimate.com/github/willianantunes/nextjs-playground/test_coverage)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 First I use it to test Next.JS and its various features. I had a big headache to configure Jest with it in order to work properly but now everything seems OK. 
 

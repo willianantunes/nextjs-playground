@@ -1,10 +1,10 @@
-import Header from './Header';
+import Header from './Header'
 
-export default function StandardLayout(props) {
+export default function StandardLayout (props) {
   return (
     <div>
       <Header />
       {props.children}
     </div>
-  );
+  )
 }

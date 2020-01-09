@@ -1,6 +1,6 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Header from '../../../src/components/Header';
+import React from 'react'
+import renderer from 'react-test-renderer'
+import Header from '../../../src/components/Header'
 
 jest.mock('next/router', () => ({
   withRouter: component => {
@@ -8,17 +8,17 @@ jest.mock('next/router', () => ({
       ...component.defaultProps,
       router: {
         pathname: '/',
-        query: null,
-      },
-    };
+        query: null
+      }
+    }
 
-    return component;
-  },
-}));
+    return component
+  }
+}))
 
 test('Should properly render Header component', () => {
-  const component = renderer.create(<Header />);
-  let tree = component.toJSON();
+  const component = renderer.create(<Header />)
+  const tree = component.toJSON()
   expect(tree).toMatchInlineSnapshot(`
     <div>
       <header>
@@ -61,5 +61,5 @@ test('Should properly render Header component', () => {
         </nav>
       </header>
     </div>
-  `);
-});
+  `)
+})

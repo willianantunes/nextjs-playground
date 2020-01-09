@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import { withRouter } from 'next/router';
-import classnames from 'classnames';
-import 'bootstrap-css-only/css/bootstrap.min.css';
+import Link from 'next/link'
+import { withRouter } from 'next/router'
+import classnames from 'classnames'
+import 'bootstrap-css-only/css/bootstrap.min.css'
 
-function Header({ router }) {
+function Header ({ router }) {
   return (
     <div>
       <header>
@@ -26,7 +26,7 @@ function Header({ router }) {
         </nav>
       </header>
     </div>
-  );
+  )
 }
 
-export default withRouter(Header);
+export default withRouter(Header)

@@ -1,9 +1,9 @@
-import logplease, {Colors} from 'logplease';
+import logplease, { Colors } from 'logplease'
 
-const DEFAULT_LOG_LEVEL = 'INFO';
-const logLevel = process.env.LOG_LEVEL || DEFAULT_LOG_LEVEL;
+const DEFAULT_LOG_LEVEL = 'INFO'
+const logLevel = process.env.LOG_LEVEL || DEFAULT_LOG_LEVEL
 
-logplease.setLogLevel(logLevel);
+logplease.setLogLevel(logLevel)
 
 const options = {
   useColors: true,
@@ -12,9 +12,9 @@ const options = {
   useLocalTime: false,
   showLevel: true,
   filename: null,
-  appendFile: true,
-};
+  appendFile: true
+}
 
-export default function(loggerName) {
-  return logplease.create(loggerName, options);
+export default function (loggerName) {
+  return logplease.create(loggerName, options)
 }

@@ -1,21 +1,21 @@
-import StandardLayout from '../components/StandardLayout';
-import ListOfMessages from '../components/challenge/ListOfMessages';
-import { useState } from 'react';
-import { connect } from 'react-redux';
-import { deleteAllMessages, addMessage } from '../redux/actions/challengeActions';
+import StandardLayout from '../components/StandardLayout'
+import ListOfMessages from '../components/challenge/ListOfMessages'
+import { useState } from 'react'
+import { connect } from 'react-redux'
+import { addMessage, deleteAllMessages } from '../redux/actions/challengeActions'
 
-function Index(props) {
-  const initialState = 'Hey @Aladdin and @Genie, wanna help (omg)?! See https://gist.github.com/willianantunes';
-  const [configuredMessage, setConfiguredMessage] = useState(initialState);
+function Index (props) {
+  const initialState = 'Hey @Aladdin and @Genie, wanna help (omg)?! See https://gist.github.com/willianantunes'
+  const [configuredMessage, setConfiguredMessage] = useState(initialState)
 
-  async function sendForm(event) {
-    event.preventDefault();
-    props.dispatch(addMessage(configuredMessage, () => setConfiguredMessage('')));
+  async function sendForm (event) {
+    event.preventDefault()
+    props.dispatch(addMessage(configuredMessage, () => setConfiguredMessage('')))
   }
 
-  function cleanAllMessages(event) {
-    event.preventDefault();
-    props.dispatch(deleteAllMessages());
+  function cleanAllMessages (event) {
+    event.preventDefault()
+    props.dispatch(deleteAllMessages())
   }
 
   return (
@@ -57,13 +57,13 @@ function Index(props) {
         <ListOfMessages />
       </main>
     </StandardLayout>
-  );
+  )
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
-    challengeReducer: state.challengeReducer,
-  };
+    challengeReducer: state.challengeReducer
+  }
 }
 
-export default connect(mapStateToProps)(Index);
+export default connect(mapStateToProps)(Index)
