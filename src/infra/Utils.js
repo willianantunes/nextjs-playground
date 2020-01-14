@@ -26,3 +26,11 @@ export function useItIfDefinedOtherwise (value, defaultValue) {
   if (value) return value
   else return defaultValue
 }
+
+export function debounce (fn, milliseconds) {
+  let timeoutID = 0
+  return () => {
+    clearTimeout(timeoutID)
+    timeoutID = setTimeout(fn, milliseconds)
+  }
+}
