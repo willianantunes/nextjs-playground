@@ -20,7 +20,6 @@ describe('Integrations tests for health endpoint', () => {
   })
 
   test('Should return 200 informing internet status if OK', async () => {
-    // dns.promises.lookup.mockReset();
     const response = await fetch(url)
     const jsonResult = await response.json()
 
