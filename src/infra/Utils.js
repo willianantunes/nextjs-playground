@@ -26,3 +26,10 @@ export function useItIfDefinedOtherwise (value, defaultValue) {
   if (value) return value
   else return defaultValue
 }
+
+export function * findMatchesGivenRegex (target, regex) {
+  let matchedContent
+  while ((matchedContent = regex.exec(target))) {
+    yield matchedContent[1]
+  }
+}
