@@ -1,5 +1,8 @@
 import 'url-polyfill/url-polyfill.min'
 import fetch from 'isomorphic-unfetch'
+import Logger from './logger'
+
+const logger = Logger('Http')
 
 export async function get (url, params = {}, headers = {}) {
   url = new URL(url)
@@ -10,6 +13,9 @@ export async function get (url, params = {}, headers = {}) {
     headers: {
       ...headers
     }
+  }).then(res => {
+    logger.debug('Parsing response checking the content-type header...')
+    return res.headers.get('Content-Type').includes('text') ? res.text() : res.json()
   })
 }
 

@@ -41,16 +41,17 @@ export function addMessage (configuredMessage, done = () => {}) {
     const parsedMessaged = await evaluate(configuredMessage)
     const messageToBePersisted = new Message(null, configuredMessage, parsedMessaged)
 
-    return messageDao
-      .save(messageToBePersisted)
-      .then(persistedMessage => {
-        dispatch({ type: types.MESSAGE_ADDED, payload: persistedMessage })
-        done()
-      })
-      .catch(err => {
-        logger.error(`An error was caught during addMessage logic: ${err}`)
-        dispatch({ type: types.ADDING_MESSAGE_ERROR })
-      })
+    /**
+     * Just an option using async await
+     */
+    try {
+      const persistedMessage = await messageDao.save(messageToBePersisted)
+      dispatch({ type: types.MESSAGE_ADDED, payload: persistedMessage })
+      done()
+    } catch (err) {
+      logger.error(`An error was caught during addMessage logic: ${err}`)
+      dispatch({ type: types.ADDING_MESSAGE_ERROR })
+    }
   }
 }
 
