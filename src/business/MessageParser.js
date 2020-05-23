@@ -3,7 +3,7 @@ import { getDetails } from '../services/PageDetailsService'
 
 const logger = Logger('MessageParser')
 
-const extractMentions = message => {
+function extractMentions (message) {
   const mentionRegex = /@(\w+)/g
   const mentions = []
   let matchedContent
@@ -15,7 +15,7 @@ const extractMentions = message => {
   return mentions
 }
 
-const extractEmoticons = message => {
+function extractEmoticons (message) {
   const emoticonsRegex = /\(([ -~]{0,15})\)/g
   const emoticons = []
   let matchedContent
@@ -27,7 +27,7 @@ const extractEmoticons = message => {
   return emoticons
 }
 
-const extractLinks = async message => {
+async function extractLinks (message) {
   const linksRegex = /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*))/g
   const links = []
   let matchedContent
@@ -45,13 +45,7 @@ const extractLinks = async message => {
   return links
 }
 
-/**
- * In the same file you have used two types of function declarations.
- * One of them using arrow function and another with the clause function.
- * Try to keep a pattern until the end. Personally I prefer arrow functions.
- */
-
-const evaluate = async (message) => {
+export default async function evaluate (message) {
   logger.info('Extracting mentions...')
   const mentions = extractMentions(message)
   logger.info('Extracting Emoticons...')
@@ -65,5 +59,3 @@ const evaluate = async (message) => {
     links
   }
 }
-
-export default evaluate

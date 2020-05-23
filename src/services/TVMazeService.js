@@ -12,7 +12,9 @@ export async function showSearch (name) {
   const showSearchEndpoint = `${endpoint}/search/shows`
   const params = { q: name }
 
-  return await httpService.get(showSearchEndpoint, params)
+  const response = await httpService.get(showSearchEndpoint, params)
+  logger.debug('Parsing response as JSON...')
+  return response.json()
 }
 
 /**
@@ -22,5 +24,7 @@ export async function showMainInformation (id) {
   logger.debug(`Finding show details given the following ID: ${id}`)
   const showMainInformationEndpoint = `${endpoint}/shows/${id}`
 
-  return await httpService.get(showMainInformationEndpoint)
+  const response = await httpService.get(showMainInformationEndpoint)
+  logger.debug('Parsing response as JSON...')
+  return response.json()
 }

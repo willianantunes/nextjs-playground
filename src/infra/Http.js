@@ -5,21 +5,23 @@ import Logger from './logger'
 const logger = Logger('Http')
 
 export async function get (url, params = {}, headers = {}) {
+  logger.debug(`Doing GET to ${url}`)
   url = new URL(url)
+
   if (params) {
     Object.entries(params).forEach(([key, value]) => url.searchParams.append(key, value))
   }
+
   return fetch(url.href, {
     headers: {
       ...headers
     }
-  }).then(res => {
-    logger.debug('Parsing response checking the content-type header...')
-    return res.headers.get('Content-Type').includes('text') ? res.text() : res.json()
   })
 }
 
-export async function post (url, { body, headers } = {}) {
+export function post (url, { body, headers } = {}) {
+  logger.debug(`Doing POST to ${url}`)
+
   return fetch(url, {
     method: 'POST',
     headers: {

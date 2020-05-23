@@ -9,5 +9,7 @@ export async function getDetails (url) {
   logger.debug(`Details for ${url}`)
   const params = { url }
 
-  return await httpService.get(endpoint, params)
+  const response = await httpService.get(endpoint, params)
+  logger.debug('Parsing response as JSON...')
+  return response.json()
 }
