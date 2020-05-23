@@ -3,7 +3,7 @@ import { getDetails } from '../services/PageDetailsService'
 
 const logger = Logger('MessageParser')
 
-const extractMentions = message => {
+function extractMentions (message) {
   const mentionRegex = /@(\w+)/g
   const mentions = []
   let matchedContent
@@ -15,7 +15,7 @@ const extractMentions = message => {
   return mentions
 }
 
-const extractEmoticons = message => {
+function extractEmoticons (message) {
   const emoticonsRegex = /\(([ -~]{0,15})\)/g
   const emoticons = []
   let matchedContent
@@ -27,7 +27,7 @@ const extractEmoticons = message => {
   return emoticons
 }
 
-const extractLinks = async message => {
+async function extractLinks (message) {
   const linksRegex = /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*))/g
   const links = []
   let matchedContent

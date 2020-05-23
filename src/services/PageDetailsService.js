@@ -8,8 +8,8 @@ const endpoint = process.env.PAGE_DETAILS_ENDPOINT
 export async function getDetails (url) {
   logger.debug(`Details for ${url}`)
   const params = { url }
-  return httpService.get(endpoint, params).then(res => {
-    logger.debug('Parsing response as JSON...')
-    return res.json()
-  })
+
+  const response = await httpService.get(endpoint, params)
+  logger.debug('Parsing response as JSON...')
+  return response.json()
 }

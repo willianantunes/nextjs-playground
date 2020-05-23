@@ -12,10 +12,9 @@ export async function showSearch (name) {
   const showSearchEndpoint = `${endpoint}/search/shows`
   const params = { q: name }
 
-  return httpService.get(showSearchEndpoint, params).then(res => {
-    logger.debug('Parsing response as JSON...')
-    return res.json()
-  })
+  const response = await httpService.get(showSearchEndpoint, params)
+  logger.debug('Parsing response as JSON...')
+  return response.json()
 }
 
 /**
@@ -25,8 +24,7 @@ export async function showMainInformation (id) {
   logger.debug(`Finding show details given the following ID: ${id}`)
   const showMainInformationEndpoint = `${endpoint}/shows/${id}`
 
-  return httpService.get(showMainInformationEndpoint).then(res => {
-    logger.debug('Parsing response as JSON...')
-    return res.json()
-  })
+  const response = await httpService.get(showMainInformationEndpoint)
+  logger.debug('Parsing response as JSON...')
+  return response.json()
 }
