@@ -8,7 +8,7 @@ test('Should search for show given the provided name and return a fixed list of 
   expect(typeof someFoundShow.score).toBe('number')
   expect(typeof someFoundShow.show.id).toBe('number')
   expect(typeof someFoundShow.show.name).toBe('string')
-  expect(someFoundShow.show.name).toBe('Batman')
+  expect(someFoundShow.show.name).toBe('The Batman')
   expect(typeof someFoundShow.show.summary).toBe('string')
 })
 
