@@ -1,13 +1,20 @@
 # Next.JS Playground
 
 ![Actions Status](https://github.com/willianantunes/nextjs-playground/workflows/Build%20and%20publish/badge.svg)
-[![Maintainability](https://api.codeclimate.com/v1/badges/f6dd63e6e10ef73de838/maintainability)](https://codeclimate.com/github/willianantunes/nextjs-playground/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/f6dd63e6e10ef73de838/test_coverage)](https://codeclimate.com/github/willianantunes/nextjs-playground/test_coverage)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=willianantunes_nextjs-playground&metric=coverage)](https://sonarcloud.io/dashboard?id=willianantunes_nextjs-playground)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=willianantunes_nextjs-playground&metric=ncloc)](https://sonarcloud.io/dashboard?id=willianantunes_nextjs-playground)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=willianantunes_nextjs-playground&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=willianantunes_nextjs-playground)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=willianantunes_nextjs-playground&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=willianantunes_nextjs-playground)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=willianantunes_nextjs-playground&metric=security_rating)](https://sonarcloud.io/dashboard?id=willianantunes_nextjs-playground)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=willianantunes_nextjs-playground&metric=sqale_index)](https://sonarcloud.io/dashboard?id=willianantunes_nextjs-playground)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=willianantunes_nextjs-playground&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=willianantunes_nextjs-playground)
 
-First I use it to test Next.JS and its various features. I had a big headache to configure Jest with it in order to work properly but now everything seems OK. 
+First I use it to test Next.JS and its various features. I had a big headache to configure Jest with it in order to work
+properly but now everything seems OK.
 
-Well here you'll see my solution for a **code-challenge** which I believe is not used anymore as it is old, maybe if you search for it you may find it somewhere in GitHub.
+Well here you'll see my solution for a **code-challenge** which I believe is not used anymore as it is old, maybe if you
+search for it you may find it somewhere in GitHub.
 
 As always I'm following [Yoda's philosophy](https://github.com/be-dev-yes/yoda), that's why this project exists.
 
@@ -33,7 +40,7 @@ See the logs:
 Run it:
 
     docker-compose up app
-    
+
 Execute the following to test everything:
 
     docker-compose up all-test
@@ -41,7 +48,8 @@ Execute the following to test everything:
 ## Challenge details
 
 1. **@mentions**: A way to mention a user. Always starts with an '@' and ends when hitting a non-word.
-2. **Emoticons**: For this exercise, you only need to consider 'custom' emoticons which are ASCII strings, no longer than 15 characters, contained in parenthesis. You can assume that anything matching this format is an emoticon.
+2. **Emoticons**: For this exercise, you only need to consider 'custom' emoticons which are ASCII strings, no longer
+   than 15 characters, contained in parenthesis. You can assume that anything matching this format is an emoticon.
 3. **Links**: Any URLs contained in the message, along with the page's title.
 
 For example, calling your function with the following inputs should result in the corresponding return values.
@@ -56,7 +64,6 @@ For example, calling your function with the following inputs should result in th
       ]
     }
 
-
 **Input:** "Good morning! (megusta) (coffee)"
 
 **Return (string):**
@@ -67,7 +74,6 @@ For example, calling your function with the following inputs should result in th
         "coffee"
       ]
     }
-
 
 **Input:** "Olympics are starting soon; http://www.nbcolympics.com"
 
@@ -81,7 +87,6 @@ For example, calling your function with the following inputs should result in th
         }
       ]
     }
-
 
 **Input:** "@bob @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016"
 

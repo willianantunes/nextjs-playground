@@ -15,13 +15,6 @@ jobs:
           node-version: 12.x
       - name: Packages installation
         run: npm ci
-      - name: Test and publish code coverage
-        uses: paambaati/codeclimate-action@v2.3.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.TEST_REPORTER_ID }}
-        with:
-          coverageCommand: npm run test
-          debug: true
       - name: Docker Hub login
         uses: azure/docker-login@v1
         with:
